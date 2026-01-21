@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alert</title>
+    <style>
+		@font-face {
+			font-family: "RobotoCondensed";
+			src: url("./RobotoCondensed.ttf") format("truetype");
+		}
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1920px;
+			height: 1080px;
+        }
+        #alertBox {
+            position: absolute;
+            bottom: 0px;
+            /* left: 0%; */
+            left: -100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            color: white;
+            padding: 20px;
+            font-size: 50px;
+            transition: left 1s ease;
+			width: auto;
+			margin-bottom: 64px;
+			border-radius: 0 16px 16px 0;
+			display: flex;
+			align-items: center;
+			font-family: "RobotoCondensed";
+			font-weight: bold;
+        }
+		#alertBoxText {
+			height: 100%;
+		}
+		img {
+			border-radius: 16px;
+			width: 75px;
+			height: 75px;
+			float: left;
+			margin-right: 20px;
+		}
+    </style>
+</head>
+<body>
+    <div id="alertBox">
+		<img src="./logo.png">
+
+		<span id="alertBoxText">
+			Alert text
+		</span>
+	</div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:9876');
+
+        ws.onmessage = function(event) {
+            const alertBox = document.getElementById('alertBox');
+            const alertBoxText = document.getElementById('alertBoxText');
+			console.log(event.data);
+            alertBoxText.textContent = event.data;
+
+            alertBox.style.left = '0%';
+
+            setTimeout(() => {
+                alertBox.style.left = '-100%';
+            }, 3000);
+        };
+    </script>
+</body>
+</html>

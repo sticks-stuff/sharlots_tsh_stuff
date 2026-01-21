@@ -1,0 +1,178 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 1920px;
+	height: 1080px;
+	/* background-image: url('Nicki (Ice Climbers) vs Aklo (Fox) - DPG 2024 - Melee Singles_ Losers Finals (Top 8) - YouTube - 0-18-40.jpeg'); */
+	background-size: cover;
+	background-position: center;
+	object-fit: cover;
+	display: flex;
+	justify-content: center;
+}
+
+.main_container {
+	display: flex;
+	flex-direction: row;
+	width: 98%;
+	height: 100px;
+	bottom: 20px;
+	position: absolute;
+	background-color: black;
+	border-radius: 18px;
+	align-items: center;
+	box-sizing: border-box;
+	padding-left: 44px;
+	padding-right: 44px;
+	background-image: url("./comms_background.png");
+	background-position-y: bottom;
+}
+
+.local-time {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	/* width: 200px; */
+	height: 100%;
+	color: white;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 24px;
+	text-align: center;
+}
+
+.time-header {
+	font-weight: bold;
+	text-transform: uppercase;	
+	font-size: 16px;
+}
+
+.time-display {
+	font-size: 36px;
+	font-weight: bold;
+	margin-top: -6px;
+	margin-bottom: -6px;
+	/* color: rgb(255, 85, 114); */
+	color: white;
+}
+
+.time-zone {
+	font-size: 18px;
+}
+
+.vertical-line {
+	width: 2px;
+	height: 81%;
+	background-color: rgba(255, 255, 255, 0.6);
+	margin: 0 40px;
+	border-radius: 1px;
+}
+
+.profile-picture {
+	background-color: aqua;
+	border-radius: 100%;
+	width: 115px;
+	height: 115px;
+	margin-left: 60px;
+	margin-bottom: 20px;
+	background-image: url('./person.svg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.inner-picture {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: white;
+}
+
+.player-name {
+	position: absolute;
+	bottom: -17px;
+	display: flex;
+	left: 226px;
+	width: 238px;
+	background: rgb(63, 15, 29);
+	justify-content: center;
+	align-items: center;
+	height: 38px;
+	border-radius: 14px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 22px;
+	border-bottom: 2px solid rgba(255,255,255,0.5);
+}
+
+.sponsor {
+	/* margin-right: 5px; */
+	color: rgb(223, 151, 66);
+}
+
+.name {
+	max-width: 238px;
+	font-weight: bold;
+	color: white;
+}
+
+.score {
+	width: 87px;
+	margin-left: 80px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bolder;
+	font-size: 44px;
+	letter-spacing: 6px;
+	color: white;
+}
+
+.profile-picture.player-right {
+	margin-left: 66px;
+	background-color: crimson;
+}
+
+.player-name.player-right-name {
+	left: 574px;
+}
+
+.now {
+	margin-left: 101px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 22px;
+	font-weight: bold;
+	background: rgb(255, 85, 114);
+	color: black;
+	padding: 2px;
+	border-radius: 10px;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-bottom: 51px;
+}
+
+.round {
+	margin-left: 17px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 30px;
+	font-weight: bolder;
+	color: white;
+	text-transform: uppercase;
+	/* color: black; */
+	/* margin-right: 313px; */
+}
+
+.vertical-line.line-2 {
+	margin-left: auto;
+}
+
+.logo {
+	background-image: url('./js3_logo_trim.png');
+	
+	height: 100%;
+	width: 190px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	/* margin-left: auto;	 */
+}
