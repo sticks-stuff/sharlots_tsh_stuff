@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "axios": "^1.6.2",
+    "axios": "^1.13.5",
     "jsoneditor": "^10.0.0",
     "jsonform": "^2.2.5",
     "obs-websocket-js": "^5.0.3",
