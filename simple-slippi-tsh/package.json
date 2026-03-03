@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@slippi/slippi-js": "^6.7.0",
+    "@vinceau/slp-realtime": "^4.0.0",
+    "axios": "^1.13.2",
+    "rxjs": "^6.6.7"
+  }
+}
