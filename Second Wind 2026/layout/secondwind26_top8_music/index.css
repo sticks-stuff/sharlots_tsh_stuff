@@ -1,0 +1,327 @@
+@font-face {
+  font-family: 'LEMON MILK';
+  src: url('LEMONMILK-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+.main_container
+.vertical-line
+.local-time
+.player-left.profile-picture
+.player-left-name
+.player-right.profile-picture
+.player-right-name
+.score
+.now
+.round
+.logo {
+    will-change: transform, opacity, rotate, translate;
+	transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 1920px;
+	height: 1080px;
+	/* background-image: url('Nicki (Ice Climbers) vs Aklo (Fox) - DPG 2024 - Melee Singles_ Losers Finals (Top 8) - YouTube - 0-18-40.jpeg'); */
+	background-size: cover;
+	background-position: center;
+	object-fit: cover;
+	display: flex;
+	justify-content: center;
+	filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.main_container {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+	/* left: 1%; */
+	height: 100px;
+	bottom: 20px;
+	position: absolute;
+	background-color: black;
+	border-radius: 18px;
+	align-items: center;
+	background-image: url("water_small.png");
+	box-sizing: border-box;
+	padding-left: 44px;
+	padding-right: 44px;
+    background-attachment: fixed;
+}
+
+.local-time {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 107px;
+	height: 100%;
+	color: white;
+	font-family: 'LEMON MILK';
+	font-size: 24px;
+	text-align: center;
+	text-shadow: 0px 0px 8px rgb(0, 0, 0);
+	-webkit-text-stroke: 2px black;
+	paint-order: stroke fill;
+}
+
+.time-header {
+	font-weight: bold;
+	text-transform: uppercase;	
+	font-size: 16px;
+}
+
+.time-display {
+	font-size: 36px;
+	font-weight: bold;
+	margin-top: -6px;
+	margin-bottom: -6px;
+	color: #ffda85;
+}
+
+.time-zone {
+	font-size: 18px;
+}
+
+.vertical-line {
+	width: 2px;
+	height: 81%;
+	background-color: rgba(255, 255, 255, 0.6);
+	margin: 0 38px;
+	border-radius: 1px;
+}
+
+.profile-picture {
+	background-color: aqua;
+	border-radius: 100%;
+	width: 115px;
+	height: 115px;
+	margin-left: 60px;
+	margin-bottom: 20px;
+	background-image: url('./person.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.inner-picture {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: white;
+}
+
+.player-name {
+	position: absolute;
+	bottom: -17px;
+	display: flex;
+	left: 226px;
+	width: 238px;
+	background: rgb(63, 15, 29);
+	justify-content: center;
+	align-items: center;
+	height: 38px;
+	border-radius: 14px;
+	font-family: 'LEMON MILK';
+	font-size: 22px;
+	border-bottom: 2px solid rgba(255,255,255,0.5);
+	background-image: url(paua_dark_small.png);
+	background-size: 630px;
+	background-position: 290px 100px;
+	padding-left: 16;
+	padding-right: 16;
+	box-sizing: border-box;
+}
+
+.sponsor {
+	/* margin-right: 5px; */
+	color: rgb(223, 151, 66);
+}
+
+.name {
+	max-width: 206px;
+	font-weight: bold;
+	color: white;
+}
+
+.score {
+    width: 107px;
+    margin-left: 60px;
+	font-family: 'LEMON MILK';
+	font-weight: bolder;
+	font-size: 44px;
+	letter-spacing: 6px;
+	color: white;
+}
+
+.profile-picture.player-right {
+	margin-left: 66px;
+	background-color: crimson;
+}
+
+.player-name.player-right-name {
+	left: 574px;
+}
+
+.now {
+	margin-left: 101px;
+	font-family: 'LEMON MILK';
+	font-size: 22px;
+	font-weight: bold;
+	/* background: rgb(255, 85, 114); */
+	color: white;
+	/* padding: 2px; */
+	border-radius: 10px;
+	/* padding-left: 8px; */
+	/* padding-right: 8px; */
+	margin-bottom: 0px;
+	/* margin-bottom: 51px; */
+	filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1));
+	background-image: url("paua_dark.png");
+	background-size: 230px;
+	width: 76px;
+	height: 34px;
+}
+
+
+.now > .text {
+	padding: 2px;
+    border-radius: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 0px;
+    padding: 2px;
+}
+
+.round {
+	margin-left: 17px;
+	font-family: 'LEMON MILK';
+	font-size: 30px;
+	font-weight: bolder;
+	color: white;
+	text-transform: uppercase;
+	/* color: black; */
+	/* margin-right: 313px; */
+}
+
+.vertical-line.line-2 {
+	margin-left: auto;
+}
+
+.logo {
+	background-image: url('./Second_Wind_Logo_White_small.png');
+	height: 100%;
+	width: 190px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1));
+	/* margin-left: auto;	 */
+	/* filter: drop-shadow(0 5px 2px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 5px 3px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 4px 7px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 -1px 4px rgba(0, 0, 0, 0.1)); */
+}
+
+.text {
+	text-shadow: 0px 0px 8px rgb(0, 0, 0);
+	-webkit-text-stroke: 2px black;
+	paint-order: stroke fill;
+}
+
+.player-left-name .sponsor {
+    color: var(--p1-sponsor-color);
+}
+
+.player-right-name .sponsor {
+    color: var(--p2-sponsor-color);
+}
+
+
+.losers {
+  align-items: center;
+  background: #fff;
+  border-radius: 6px;
+  color: #000;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 800;
+  height: 20px;
+  justify-content: center;
+  margin: 0 5px;
+  text-align: center;
+  width: 20px;
+  text-shadow: none;
+  -webkit-text-stroke: 0;
+}
+
+
+.player-left-name .losers {
+    background: var(--p1-sponsor-color);
+    color: lch(from var(--p1-sponsor-color) calc((49.44 - l)* infinity) 0 0);
+}
+
+.player-right-name .losers {
+    background: var(--p2-sponsor-color);
+    color: lch(from var(--p2-sponsor-color) calc((49.44 - l)* infinity) 0 0);
+}
+
+.main_container1 {
+	left: 1%;
+}
+.main_container2 {
+	right: 1%;
+}
+
+.main_container3 {
+    right: 1%;
+    bottom: 140px;
+    padding-left: 22px;
+    padding-right: 22px;
+    min-width: 400px;
+    max-width: 577px;
+}
+
+.music-player {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'LEMON MILK';
+    overflow: hidden;
+}
+
+.music-header {
+    font-size: 18px;
+    /* opacity: 0.8; */
+    margin-bottom: 4px;
+	
+    text-shadow: 0px 0px 8px rgb(0, 0, 0);
+    -webkit-text-stroke: 2px black;
+    paint-order: stroke fill;
+}
+
+.music-title {
+    font-size: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #ffda85;
+}

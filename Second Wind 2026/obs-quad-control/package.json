@@ -1,0 +1,13 @@
+{
+  "name": "obs-quad-control",
+  "version": "1.0.0",
+  "description": "Extremely simple remote control for a 4-quadrant OBS stream",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "obs-websocket-js": "^5.0.6"
+  }
+}

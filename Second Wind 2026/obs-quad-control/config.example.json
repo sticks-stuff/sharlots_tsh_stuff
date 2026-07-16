@@ -1,0 +1,43 @@
+{
+  "obs": {
+    "address": "ws://127.0.0.1:4455",
+    "password": "your-obs-websocket-password"
+  },
+  "server": {
+    "port": 3000
+  },
+  "scenes": [
+    "quad",
+    "focus_q1",
+    "focus_q2",
+    "focus_q3",
+    "focus_q4",
+    "focus_q1q2",
+    "focus_q3q4",
+    "focus_q1q3",
+    "focus_q2q4",
+    "focus_q1q4",
+    "focus_q2q3"
+  ],
+  "sceneLabels": {
+    "quad": "Quad (Normal)"
+  },
+  "overlays": [
+    "overlay_1",
+    "overlay_2",
+    "overlay_3",
+    "overlay_4"
+  ],
+  "speakerIconSourceName": "speaker_icon",
+  "audio": {
+    "1": "Mic 1",
+    "2": "Mic 2",
+    "3": "Mic 3",
+    "4": "Mic 4"
+  },
+  "screenshot": {
+    "width": 160,
+    "height": 90,
+    "intervalMs": 1000
+  }
+}

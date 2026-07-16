@@ -1,0 +1,684 @@
+@font-face {
+  font-family: "NotoSans-Black";
+  src: url("../include/NotoSans-Black.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoCondensed";
+  src: url("../include/RobotoCondensed.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../include/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Oswald";
+  src: url("../include/Oswald.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'LEMON MILK';
+  src: url('LEMONMILK-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: "LEMON MILK";
+  font-weight: bold;
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  height: 1080px;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 3px 1px rgba(0, 0, 0, 0.14))
+    drop-shadow(0 1px 5px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.1));
+  letter-spacing: 1;
+  text-transform: uppercase;
+  opacity: 0;
+  --p1-sponsor-color: rgb(187, 187, 187) !important;
+  --p2-sponsor-color: rgb(187, 187, 187) !important;
+}
+
+.text {
+  text-shadow: 0px 0px 8px rgb(0, 0, 0);
+  -webkit-text-stroke: 6px black;
+  paint-order: stroke fill;
+}
+
+.anim_container_outer {
+  position: absolute;
+  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1920px;
+  height: 1080px;
+}
+
+.anim_container_inner {
+  position: absolute;
+  overflow: hidden;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1920px;
+  height: 1080px;
+}
+
+.container {
+  color: var(--text-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.base_container_outer {
+  overflow: hidden;
+  width: 1000px;
+  position: absolute;
+  top: 16px;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.base_container {
+  position: relative;
+  color: var(--text-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  border-radius: var(--border-radius);
+  /* align-items: center; */
+  width: 1000px;
+  gap: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* background: var(--bg-color); */
+  /* overflow: hidden; */
+  height: auto;
+  outline: 1px solid rgba(255, 255, 255, 0.5);
+  top: 1px;
+}
+
+.base_container::before,
+.base_container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Confidently pushes both layers behind your text/content */
+  
+  background-image: url(paua_dark.png);
+  background-size: 1920px 1080px;
+  background-repeat: no-repeat;
+  /* background-attachment: fixed; */
+  background-position: 100% 28%;
+}
+
+/* LEFT SIDE: Normal canvas, clipped to show only the left 50% */
+.base_container::before {
+  /* clip-path: inset(0 50% 0 0); Hides the right half */
+}
+
+/* RIGHT SIDE: Flipped canvas, clipped to show only the right 50% */
+.base_container::after {
+  clip-path: inset(0 0 0 50%); /* Hides the left half */
+  transform-origin: 50% center; /* Pinpoints the flip exactly on the middle seam */
+  transform: scaleX(-1);        /* Flips horizontally */
+}
+
+.fullwidth .base_container_outer {
+  width: 100vw;
+  top: 0;
+  left: 0;
+  transform: none;
+}
+
+.fullwidth .base_container {
+  width: 95.6%;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.line {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  justify-content: center;
+  top: 79px;
+  font-size: 29px;
+  color: white;
+}
+
+.mid_col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 1000px;
+  padding: 0 16px;
+  /* height: 92px; */
+  justify-content: space-evenly;
+  box-sizing: border-box;
+}
+
+.fullwidth .mid_col {
+  max-width: 100%;
+}
+
+.divider {
+  position: relative;
+  /* height: 50%; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  font-family: "LEMON MILK";
+  font-size: 52px;
+  /* top: 15%; */
+  text-shadow: 0px 0px 8px rgb(0, 0, 0);
+  -webkit-text-stroke: 6px black;
+  paint-order: stroke fill;
+}
+
+.players {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.player.container {
+  width: 100%;
+  height: 100%;
+  /* align-items: flex-end; */
+  /* padding: 4px 4px; */
+  display: flex;
+  gap: 8px;
+}
+
+.player.container::-webkit-scrollbar {
+  display: none;
+}
+
+.p1.container {
+  background-position: 100% 0;
+  left: 380px;
+  flex-direction: row;
+  position: relative;
+  left: 0;
+}
+
+.p2.container {
+  background-position: 0 0;
+  flex-direction: row-reverse;
+  position: relative;
+  right: 0;
+}
+
+.player.container > .name_twitter {
+  order: 1;
+  min-width: 0;
+}
+
+.player.container > .sponsor_icon {
+  order: 2;
+  flex: 1;
+  display: flex;
+  flex-grow: 0;
+}
+
+.player.container > .score {
+  order: 3;
+  flex-shrink: 0;
+  display: grid;
+  height: auto;
+}
+
+.name_twitter {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 6px;
+  font-family: "LEMON MILK";
+}
+
+.name_twitter > .text {
+  flex-shrink: 0;
+  /* justify-content: flex-start; */
+}
+
+.p2 .name_twitter > .text {
+  /* justify-content: flex-end; */
+}
+
+.score, .phase, .match, .best_of {
+  -webkit-text-stroke: 4px var(--bg-color);
+}
+
+.flagname {
+  -webkit-text-stroke: 4px var(--bg-color);
+}
+
+.p2 .name_twitter {
+  margin-right: unset;
+  margin-left: auto;
+}
+
+.name_twitter .sponsor {
+  display: inline-block;
+  font-size: 42px;
+  overflow: hidden;
+}
+
+.name_twitter .name {
+  display: flex;
+  font-size: 48px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.team-members {
+  display: flex;
+  font-size: 26px;
+  opacity: 0.75;
+  gap: 4px;
+}
+
+.name_twitter .twitter {
+  font-size: 14px;
+}
+
+.twitter_logo {
+  -webkit-mask-image: url(../icons/twitter.svg);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  background: var(--text-color);
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+
+.light .twitter_logo {
+  filter: invert(1);
+}
+
+.logo {
+  position: absolute;
+  top: 128px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background-image: url("../logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: var(--border-radius);
+  z-index: 9;
+}
+
+.info.container {
+  left: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-position: center;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+.info.container_inner {
+  display: flex;
+  width: 100%;
+  font-size: inherit;
+  justify-content: space-around;
+}
+
+.info.container_inner > div {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.info.container.top {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 36px;
+  padding: 8px 8px;
+}
+
+.tournament_name {
+  font-size: 18px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.info.container.bottom {
+  top: 42px;
+  left: 42px;
+  display: flex;
+  justify-content: center;
+  height: unset;
+  flex-direction: column;
+  width: 280px;
+  height: 64px;
+  font-size: 20px;
+  padding: 4px 10px;
+}
+
+.phase {
+  font-size: 16px;
+  width: 100%;
+  opacity: 0.8;
+}
+
+.phase .text {
+  justify-content: left;
+}
+
+.match {
+  /* font-size: 20px; */
+  /* letter-spacing: 2px; */
+  /* width: 100%; */
+}
+
+.best_of {
+  /* font-size: 20px; */
+  /* width: 100%; */
+  /* opacity: 0.8; */
+}
+
+.best_of .text {
+  justify-content: right;
+}
+
+.icon {
+  flex-shrink: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  /* //background: #3f3f46; */
+}
+
+.icon div:not(.text) {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.flags_container {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.p2 .flags_container {
+  flex-direction: row-reverse;
+}
+
+.flag {
+  display: inline-block;
+  object-fit: cover;
+  width: 32px;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.flagname {
+  font-size: 14px;
+  text-align: center;
+}
+
+.sponsor_icon > div > div {
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--border-radius);
+}
+
+.character_container {
+  display: flex;
+  /* overflow: hidden; */
+  height: 70px;
+  /* flex-shrink: 0; */
+  width: 70px;
+  /* position: absolute; */
+  /* z-index: -999; */
+}
+
+/* .fullwidth .character_container {
+  width: 50%;
+} */
+
+/* .tsh_character > div {
+  opacity: 0.4;
+} */
+/* 
+.tsh_character::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--bg-color) 0,
+    transparent 40%,
+    transparent 60%,
+    var(--bg-color) 100%
+  );
+  top: 0;
+  left: 0;
+} */
+
+.p1.character_container {
+  left: 0;
+}
+
+/* .p1.character_container::after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  /* background: linear-gradient(90deg, transparent 50%, var(--bg-color)); */
+  /* pointer-events: none; */
+/* } */
+
+.p2.character_container {
+  right: 0;
+}
+
+/* .p2.character_container::after {
+  position: absolute;
+  content: "";
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  /* background: linear-gradient(-90deg, transparent 50%, var(--bg-color)); */
+  /* pointer-events: none; */
+/* } */
+
+/* .p1.character_container .icon {
+  //background: var(--p1-score-bg-color);
+}
+
+.p2.character_container .icon {
+  //background: var(--p2-score-bg-color);
+} */
+
+/* .character_container > div {
+  overflow: hidden;
+} */
+
+.character_container > div {
+  height: 100%;
+  flex-direction: row;
+  height: 100%;
+}
+
+.p2 .character_container > div {
+  flex-direction: row-reverse;
+}
+
+.score {
+  font-family: "LEMON MILK";
+  width: 54px;
+  height: 54px;
+  font-size: 48px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  /* margin-right: -4px; */
+}
+
+.pronoun {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: normal;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 6px;
+  color: var(--bg-color);
+  font-family: 'LEMON MILK';
+  max-width: 100%;
+  overflow: hidden;
+  -webkit-text-stroke: 0;
+}
+
+
+.p1 .score {
+  /* color: var(--p1-sponsor-color); */
+}
+
+.sponsor {
+  font-weight: normal;
+}
+
+.p1 .sponsor {
+  color: var(--p1-sponsor-color);
+}
+
+.p1 .pronoun {
+  background-color: var(--p1-sponsor-color);
+}
+
+.p2 .score {
+  /* color: var(--p2-sponsor-color); */
+}
+
+.p2 .sponsor {
+  color: var(--p2-sponsor-color);
+}
+
+.p2 .pronoun {
+  background-color: var(--p2-sponsor-color);
+}
+
+.losers {
+  display: flex;
+  width: auto;
+  height: auto;
+  font-size: 12px;
+  border-radius: 6px;
+  padding: 3px 6px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 2px;
+  font-weight: bold;
+  z-index: 10;
+  color: var(--bg-color);
+}
+
+.losers:has(.text_empty) {
+  display: none;
+}
+
+.p1 .losers {
+  right: 4px;
+}
+
+.p2 .losers {
+  left: 4px;
+}
+
+.p1 .losers {
+  background: var(--p1-sponsor-color);
+}
+
+.p2 .losers {
+  background: var(--p2-sponsor-color);
+}
+
+.team_names {
+  padding: 0 8px;
+  font-size: 16px;
+}
+
+
+.line > div:first-child > .text::after {
+  content: "•";
+  font-size: 24px;
+  padding: 0px 5px 0px 5px;
+}
+
+.tsh-img {
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  transform: revert !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.tsh_character_img {
+  transform: revert !important;
+}

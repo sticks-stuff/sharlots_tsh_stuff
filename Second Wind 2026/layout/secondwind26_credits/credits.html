@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>credits</title>
+
+  <!--
+  ============================================================================
+  HOW TO USE THIS IN OBS
+  ============================================================================
+  1. Add a "Browser Source" to your scene.
+  2. Point it at this file (Local File checkbox → browse to credits.html),
+     OR host it somewhere and paste the URL.
+  3. Set Width/Height to match your canvas (e.g. 1920x1080).
+  4. Check "Refresh browser when scene becomes active" so the scroll restarts
+     fresh every time you cut to this scene.
+  5. Background is solid black by default (matches the fade-in). If you want
+     it transparent instead (e.g. layering over game footage), set
+     TRANSPARENT_BG to true in the CONFIG below.
+
+  HOW TO EDIT THE CREDITS
+  ============================================================================
+  Everything you need to change lives in the CONFIG object below:
+    - LOGO: path/URL to your logo image, or set to null to use a text logo.
+    - Sections: an array. Each section is one of three kinds:
+        "roles"    -> "Role .......... Name" rows, optionally under a heading
+        "allroles" -> a big heading (e.g. "RIVALS 2 COMMENTARY") followed by
+                      a plain list of names, no roles/dots
+        "sponsors" -> a heading followed by a grid of logo images
+        "text"     -> a single big centered line (used for the sign-off)
+  Replace the placeholder image paths with your own files sitting next to
+  this HTML file (or full URLs).
+  ============================================================================
+-->
+  <link rel="stylesheet" href="./credits.css" />
+</head>
+
+<body>
+
+  <div id="blackout"></div>
+
+  <div id="stage">
+    <div id="logo-bar"></div>
+    <div id="credits-viewport">
+      <div id="credits-track"></div>
+    </div>
+  </div>
+  <audio id="credits-audio" preload="auto"></audio>
+  <script src="credits.js"></script>
+
+</body>
+
+</html>

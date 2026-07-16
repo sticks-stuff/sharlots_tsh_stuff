@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quad Stream Control</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    background: #111;
+    color: #eee;
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 16px;
+  }
+  h2 { margin: 0 0 8px; font-size: 15px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+  section { margin-bottom: 24px; }
+
+  .previews {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-width: 1280px;
+  }
+  .preview {
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .preview img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    background: #222;
+  }
+  .preview .label {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 102px;
+    font-weight: bold;
+    color: #fff;
+	-webkit-text-stroke: 9px black;
+	paint-order: stroke fill;
+  }
+
+  .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+  button {
+    background: #222;
+    color: #eee;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  button:hover { background: #333; }
+  button.active { background: #2a6; border-color: #3d8; color: #fff; }
+
+  #status { font-size: 12px; color: #888; margin-bottom: 16px; }
+  #status.bad { color: #e55; }
+
+  #panicBtn {
+    background: #a11;
+    border-color: #e33;
+    color: #fff;
+    font-weight: bold;
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+  #panicBtn:hover { background: #c22; }
+  #panicBtn:disabled { background: #611; color: #caa; cursor: default; }
+</style>
+</head>
+<body>
+
+<div id="status">Loading…</div>
+
+<section>
+  <h2>Overlays</h2>
+  <div class="previews" id="previews"></div>
+</section>
+
+<section>
+  <h2>Scenes</h2>
+  <div class="buttons" id="sceneButtons"></div>
+</section>
+
+<section>
+  <h2>Active Audio Quadrant</h2>
+  <div class="buttons" id="audioButtons"></div>
+</section>
+
+<section>
+  <button id="panicBtn">emergency button - click me if the scoreboards break (refreshes all browser sources)</button>
+</section>
+
+<script>
+let cfg = null;
+let activeQuadrant = null;
+
+async function loadConfig() {
+  const res = await fetch('/api/config');
+  cfg = await res.json();
+  setStatus(cfg.connected);
+  buildPreviews();
+  buildSceneButtons();
+  buildAudioButtons();
+  startPolling();
+}
+
+function setStatus(connected) {
+  const el = document.getElementById('status');
+  el.textContent = connected ? 'Connected to OBS' : 'Not connected to OBS';
+  el.className = connected ? '' : 'bad';
+}
+
+function buildPreviews() {
+  const container = document.getElementById('previews');
+  container.innerHTML = '';
+  cfg.overlays.forEach(name => {
+    const num = name.split('_')[1];
+    const div = document.createElement('div');
+    div.className = 'preview';
+    div.innerHTML = `<span class="label">${num}</span><img id="img-${name}" alt="${name}">`;
+    container.appendChild(div);
+  });
+}
+
+function labelForScene(name) {
+  if (cfg.sceneLabels && cfg.sceneLabels[name]) return cfg.sceneLabels[name];
+  const m = name.match(/^focus_q(\d)(?:q(\d))?$/);
+  if (m) {
+    return m[2] ? `Focus Quadrant ${m[1]} and ${m[2]}` : `Focus Quadrant ${m[1]}`;
+  }
+  return name;
+}
+
+function buildSceneButtons() {
+  const container = document.getElementById('sceneButtons');
+  container.innerHTML = '';
+  cfg.scenes.forEach(name => {
+    const btn = document.createElement('button');
+    btn.textContent = labelForScene(name);
+    btn.onclick = () => {
+      callApi(`/api/scene/${name}`, btn, () => {
+        const m = name.match(/^focus_q(\d)$/);
+        if (m) setActiveQuadrant(m[1]);
+      });
+    };
+    container.appendChild(btn);
+    if (name === 'quad' || name === 'focus_q4') {
+      const br = document.createElement('div');
+      br.style.flexBasis = '100%';
+      container.appendChild(br);
+    }
+  });
+}
+
+function buildAudioButtons() {
+  const container = document.getElementById('audioButtons');
+  container.innerHTML = '';
+  cfg.quadrants.forEach(num => {
+    const btn = document.createElement('button');
+    btn.textContent = num;
+    btn.dataset.quadrant = num;
+    btn.onclick = () => callApi(`/api/audio/${num}`, btn, () => setActiveQuadrant(num));
+    container.appendChild(btn);
+  });
+}
+
+function setActiveQuadrant(num) {
+  activeQuadrant = num;
+  document.querySelectorAll('#audioButtons button').forEach(b => {
+    b.classList.toggle('active', b.dataset.quadrant === num);
+  });
+}
+
+async function callApi(url, btn, onSuccess) {
+  btn.disabled = true;
+  try {
+    const res = await fetch(url, { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      console.error(data.error || data.errors);
+      alert('Error: ' + (data.error || JSON.stringify(data.errors)));
+    } else if (onSuccess) {
+      onSuccess();
+    }
+  } catch (err) {
+    alert('Request failed: ' + err.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function startPolling() {
+  const interval = cfg.screenshotIntervalMs || 1000;
+  cfg.overlays.forEach(name => refreshPreview(name));
+  setInterval(() => {
+    cfg.overlays.forEach(name => refreshPreview(name));
+  }, interval);
+}
+
+async function refreshPreview(name) {
+  try {
+    const res = await fetch(`/api/screenshot/${name}`);
+    const data = await res.json();
+    if (data.image) {
+      const img = document.getElementById(`img-${name}`);
+      if (img) img.src = data.image;
+    }
+  } catch (err) {
+    // ignore transient errors, next poll will retry
+  }
+}
+
+document.getElementById('panicBtn').onclick = async () => {
+  const btn = document.getElementById('panicBtn');
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  btn.textContent = 'Refreshing…';
+  try {
+    const res = await fetch('/api/panic-refresh-browsers', { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      alert('Error: ' + (data.error || JSON.stringify(data.errors)));
+    } else if (data.errors && data.errors.length) {
+      alert(`Refreshed ${data.refreshed}/${data.total} browser sources.\nFailed:\n${data.errors.join('\n')}`);
+    } else {
+      btn.textContent = `Refreshed ${data.refreshed} browser source(s) ✓`;
+      setTimeout(() => { btn.textContent = originalText; }, 2000);
+    }
+  } catch (err) {
+    alert('Request failed: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    if (btn.textContent === 'Refreshing…') btn.textContent = originalText;
+  }
+};
+
+loadConfig();
+</script>
+</body>
+</html>

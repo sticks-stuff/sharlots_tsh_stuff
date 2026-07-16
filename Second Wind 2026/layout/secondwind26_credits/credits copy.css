@@ -1,0 +1,235 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap'); */
+
+@font-face {
+	font-family: 'LEMON MILK';
+	src: url('LEMONMILK-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--bg: #0a0a0d;
+	--fg: #f3f1ea;
+	--accent: #ffda85;
+	--accent-soft: rgba(201, 162, 39, 0.55);
+	--muted: #8a8a90;
+	--display-font: 'LEMON MILK';
+	--body-font: 'Inter', Arial, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: transparent;
+	overflow: hidden;
+	font-family: var(--body-font);
+}
+
+/* Stage is always transparent — the black comes from #blackout fading in */
+#stage {
+	position: fixed;
+	inset: 0;
+	background: transparent;
+	overflow: hidden;
+}
+
+/* ---------- Fade from transparent to black ---------- */
+#blackout {
+	position: fixed;
+	inset: 0;
+	background: #0a0a0d;
+	z-index: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 2000ms ease;
+}
+
+/* ---------- Scrolling viewport (sits above the blackout layer) ---------- */
+#credits-viewport {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(to bottom,
+			transparent 0px, black 60px, black calc(100% - 60px), transparent 100%);
+	mask-image: linear-gradient(to bottom,
+			transparent 0px, black 60px, black calc(100% - 60px), transparent 100%);
+}
+
+#credits-track {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 100%;
+	will-change: transform;
+	/* Safety fallback so it's never visible at the top before JS positions
+	it precisely — avoids any flash/"teleport" on load. */
+	transform: translateY(100vh);
+}
+
+/* ---------- Logo block (now part of the scrolling track) ---------- */
+.logo-block {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 0 60px 0;
+}
+
+.logo-block img {
+    max-width: 950px;
+    max-height: 410px;
+	width: auto;
+	height: auto;
+	filter: drop-shadow(0 0 22px rgba(201, 162, 39, 0.25));
+}
+
+.text-logo {
+	font-family: var(--display-font);
+	font-weight: 700;
+	letter-spacing: 6px;
+	font-size: 64px;
+	color: var(--fg);
+	text-transform: uppercase;
+	text-align: center;
+	text-shadow: 0 0 30px rgba(201, 162, 39, 0.35);
+}
+
+.text-logo .accent {
+	color: var(--accent);
+}
+
+.logo-underline {
+	width: 120px;
+	height: 3px;
+	margin: 18px auto 0 auto;
+	background: var(--accent);
+	box-shadow: 0 0 12px var(--accent-soft);
+}
+
+/* ---------- Section headings ---------- */
+.section {
+	width: 100%;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 46px 40px;
+}
+
+.section-title {
+	font-family: var(--display-font);
+	font-weight: 600;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	color: var(--accent);
+	font-size: 26px;
+	text-align: center;
+	margin: 0 0 26px 0;
+}
+
+.section-title.big {
+	font-size: 34px;
+	letter-spacing: 5px;
+}
+
+/* ---------- Role / dots / name rows ---------- */
+.credit-row {
+	display: flex;
+	align-items: baseline;
+	width: 100%;
+	margin: 12px 0;
+}
+
+.credit-row .role {
+	flex: 0 0 auto;
+	font-family: var(--display-font);
+	font-weight: 500;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-size: 18px;
+	color: var(--muted);
+	white-space: nowrap;
+}
+
+.credit-row .leader {
+	flex: 1 1 auto;
+	margin: 0 14px;
+	height: 0;
+	border-bottom: 3px dotted var(--accent-soft);
+	transform: translateY(-6px);
+}
+
+.credit-row .name {
+	flex: 0 0 auto;
+	font-family: var(--body-font);
+	font-weight: 600;
+	font-size: 20px;
+	color: var(--fg);
+	white-space: nowrap;
+}
+
+/* ---------- All-roles (name-only) list ---------- */
+.name-only {
+	text-align: center;
+	font-family: var(--body-font);
+	font-weight: 600;
+	font-size: 22px;
+	color: var(--fg);
+	margin: 10px 0;
+}
+
+/* ---------- Sponsors ---------- */
+.sponsor-grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+}
+
+.sponsor-grid img {
+	max-height: 100px;
+	max-width: 220px;
+	width: auto;
+	height: auto;
+}
+
+.sponsor-fallback {
+	min-width: 200px;
+	padding: 18px 24px;
+	text-align: center;
+	border: 1px solid var(--muted);
+	color: var(--muted);
+	font-family: var(--display-font);
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-size: 15px;
+}
+
+/* ---------- Final sign-off text ---------- */
+.final-text {
+	text-align: center;
+	font-family: var(--display-font);
+	font-weight: 700;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	font-size: 46px;
+	color: var(--fg);
+	padding: 90px 40px 160px 40px;
+	text-shadow: 0 0 26px rgba(201, 162, 39, 0.3);
+}
+
+.divider {
+	width: 60px;
+	height: 2px;
+	margin: 0 auto 40px auto;
+	background: var(--accent-soft);
+}
